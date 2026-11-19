@@ -1,0 +1,90 @@
+# $schema: https://golangci-lint.run/jsonschema/golangci.jsonschema.json
+---
+version: "2"
+
+run:
+  timeout: 5m
+  tests: true
+  modules-download-mode: readonly
+
+linters:
+  # Keep the policy explicit when upgrading the pinned tool.
+  default: none
+  enable:
+    - errcheck
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+    - errorlint
+    - nilerr
+    - nolintlint
+    - bodyclose
+    - gosec
+    - cyclop
+    - gocognit
+    - lll
+    - godot
+
+  settings:
+    errcheck:
+      # Terminal output and deferred cleanup of read-only handles and
+      # temporary paths cannot fail in a way the caller could act on.
+      # Every write path closes its files explicitly and checks the error.
+      exclude-functions:
+        - fmt.Fprint
+        - fmt.Fprintf
+        - fmt.Fprintln
+        - (*os.File).Close
+        - (*os.Root).Close
+        - (io.ReadCloser).Close
+        - (io.WriteCloser).Close
+        - os.Remove
+        - os.RemoveAll
+    cyclop:
+      # Flag functions with more than 12 independent control-flow paths.
+      max-complexity: 12
+    gocognit:
+      # Also flag deeply nested logic, even when its path count is modest.
+      min-complexity: 30
+    gosec:
+      excludes:
+        # Aska runs git by design; arguments are validated before use.
+        - G204
+        # Paths come from validated configuration and canonical identities.
+        - G304
+        # Installed skills and state files are meant to be readable.
+        - G301
+        - G302
+        - G306
+    nolintlint:
+      require-explanation: true
+      require-specific: true
+    lll:
+      line-length: 140
+      tab-width: 4
+
+  exclusions:
+    rules:
+      # Table-driven cases and fixture setup naturally repeat and branch.
+      # Correctness checks still apply to tests.
+      - path: '_test\.go$'
+        linters:
+          - cyclop
+          - gocognit
+          - gosec
+          - lll
+
+formatters:
+  enable:
+    - gofumpt
+    - goimports
+  settings:
+    goimports:
+      local-prefixes:
+        - github.com/pkgshed/aska
+
+issues:
+  # Show the full backlog instead of truncating repeated findings.
+  max-issues-per-linter: 0
+  max-same-issues: 0

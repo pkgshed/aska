@@ -1,0 +1,6 @@
+[skills.code-review]
+source = 'git+https://github.com/acme/agent-skills.git'
+path = 'skills/code-review'
+version = '^1.4'
+agents = ['codex']
+agnets = ['typo']

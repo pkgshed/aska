@@ -1,0 +1,9 @@
+lock-version = 2
+
+[[skill]]
+name = 'code-review'
+source = 'git+https://github.com/acme/agent-skills.git'
+path = 'skills/code-review'
+requested = '^1.4'
+commit = '1111111111111111111111111111111111111111'
+sha256 = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'

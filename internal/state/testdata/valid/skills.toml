@@ -1,0 +1,12 @@
+[skills]
+[skills.code-review]
+source = 'git+https://github.com/acme/agent-skills.git'
+path = 'skills/code-review'
+version = '^1.4'
+agents = ['claude', 'codex']
+
+[skills.writer]
+source = 'git+ssh://git@example.com/team/writing.git'
+path = '.'
+version = 'main'
+agents = ['pi']

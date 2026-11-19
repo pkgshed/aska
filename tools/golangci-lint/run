@@ -1,0 +1,7 @@
+#!/bin/sh
+# Run the golangci-lint version pinned in this directory's go.mod.
+set -eu
+
+tool_dir=$(cd "$(dirname "$0")" && pwd)
+tool_path=$(go tool -modfile="$tool_dir/go.mod" -n golangci-lint)
+exec "$tool_path" "$@"
