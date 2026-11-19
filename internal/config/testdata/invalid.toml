@@ -1,0 +1,14 @@
+default_agents = ["codex", "cursor"]
+
+[limits]
+max_files = -1
+
+[git]
+timeout = "0s"
+
+[agents.codex]
+project_dir = "../outside"
+user_dir = "relative/path"
+
+[log]
+level = "loud"

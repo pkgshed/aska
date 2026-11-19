@@ -1,0 +1,24 @@
+default_agents = ["pi", "opencode"]
+
+[security]
+allow_private_networks = true
+
+[limits]
+max_files = 50
+
+[git]
+command = "/usr/bin/git"
+timeout = "90s"
+
+[agents.claude]
+user_dir = "~/dotfiles/claude/skills"
+
+[agents.codex]
+project_dir = "tools/skills"
+
+[log]
+level = "debug"
+
+[review]
+enabled = false
+pager = "bat --paging=always"
